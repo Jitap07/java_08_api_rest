@@ -2,13 +2,21 @@ version: '3.9'
 
 services:
     postgres:
-        image: postgres:latest
+        image: postgres:latest  #Es por decir el "ISO" más reciente
         restart: always
-        environment:
-            POSTGRES_USER: ${SPRING_DATASOURCE_USERNAME}
-            POSTGRES_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
-            POSTGRES_DB: ${SPRING_DATASOURCE_DB}
         ports:
             - 5432:5432
-        volumes:
+        volumes:  # Opcional
             - ./postgres:/var/lib/postgresql/data
+        
+        environment:
+            # Usuario postgreSQL:
+            POSTGRES_USER: ${SPRING_DATASOURCE_USERNAME}
+            POSTGRES_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+            
+            # Base de Datos:
+            POSTGRES_DB: ${SPRING_DATASOURCE_DB}
+
+# NOTA:
+# La Sintaxis fue obtenida de la pagina DockerHub.
+# El valor de las variable " ${ ... } ", se encuentran en el archivo ".env"
